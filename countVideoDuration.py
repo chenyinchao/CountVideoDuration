@@ -17,10 +17,16 @@ if __name__ == "__main__":
             fname = os.path.join(a, name)
             if fname.endswith(('.mp4', '.mkv', '.avi', '.wmv', '.rmvb', '.flv')):
                 filelist.append(fname)
+                print(fname)
     ftime = 0.0
+    i = 0
     for item in filelist:
         clip = VideoFileClip(item)
         ftime += clip.duration
+        i += 1
         clip.close()
-    print("%(hours)d hours %(mins)d mins %(seconds)d seconds" %
-          sec_to_hours(ftime))
+    count = {'count': i}
+    dicts = sec_to_hours(ftime)
+    dicts.update(count)
+    print("总计%(count)d个 ---> %(hours)d hours %(mins)d mins %(seconds)d seconds" %
+          dicts)
